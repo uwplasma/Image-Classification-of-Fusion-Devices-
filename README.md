@@ -1,1 +1,1 @@
-# Image-Classification-of-Fusion-Devices-
+# Image-Classification-of-Fusion-Devices
