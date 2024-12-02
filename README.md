@@ -10,4 +10,5 @@ This project uses machine learning to classify stellarator fusion devices based 
 ## Acknowledgements
 - PyTorch for machine learning.
 - [pyQSC](https://github.com/landreman/pyQSC) for generating images.
+- Pedro Curvo, Diogo R. Ferreira, and R. Jorge for providing the dataset of plottable stellarators. [Dataset link](https://zenodo.org/records/13623959).
 - The community for open-source support.
