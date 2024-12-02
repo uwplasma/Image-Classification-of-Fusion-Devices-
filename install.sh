@@ -14,6 +14,10 @@ else
     python3 -m venv venv
 fi
 
+# Activate the virtual environment
+echo "Activating virtual environment..."
+source venv/bin/activate
+
 # Install Python packages
 echo "Installing Python dependencies..."
 pip install --upgrade pip
@@ -27,6 +31,5 @@ if [ -d "pyQSC" ]; then
 else
     echo "Directory 'pyQSC' not found. Skipping editable installation."
 fi
-
 
 echo "Installation complete. Activate your virtual environment with 'source venv/bin/activate'"
