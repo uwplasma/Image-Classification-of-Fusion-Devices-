@@ -24,7 +24,7 @@ for i, row in df.iterrows():
     try: 
         # Create Qsc instance and plot boundary
         stel = Qsc(rc=[1, rc1, rc2, rc3], zs=[0, zs1, zs2, zs3], nfp=nfp, etabar=etabar, B2c=B2c, p2=p2, order='r2')
-        stel.plot_boundary(r=0.1, savefig=f"image_{i+2}")
+        stel.plot_boundary(r=0.1, savefig=f"image{i+2}")
         
     except Exception as e:
         print(f"Plotting failed for row {i+2}: {e}")
