@@ -1,19 +1,31 @@
 # TESTS A SINGLE STEL IMAGE
-
+import sys
+import os
 import pandas as pd
-from pyQSC.qsc.qsc import Qsc
-from pyQSC.qsc.plot import plot_boundary
+# Get the root directory (parent of scripts)
+root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# THIS ONE DOESNT WORK
-# 0.347126884032186,0.0078911389831615,-0.0052426747017775,-0.4058800244583647,-0.0108458962094444,-0.0007034262749318,7.0,-1.402951622050688,-1.699489751459851,-639738.3338000049,17.805102767251594,5.31604841799261,4.270853518013023,0.3171715598978936,0.6660069296527531,0.138387391897874,0.1656457647279818,3.8960247911812913,0.0153959073157792,1.2261053937110007
-#==========================
-# THIS ONE WORKS (1 NFP)
-# -0.1041017136911027,-0.0661497535458673,0.0236437393892133,0.2002125058770746,-0.1107710956400647,0.0211717968763662,1.0,0.6195762665279808,-2.0503705070332745,-8479.790983777048
+# Add the pyQSC directory to the system path
+pyqsc_path = os.path.join(root_dir, 'pyQSC')
+sys.path.append(pyqsc_path)
 
-# ANOTHER ONE THAT WORKS (2 NFP)
-# -0.69319,0.020783894,0.0085303,0.7050924,-0.046939865,0.0048580985,2.0,-0.52618885,-3.9143455,-358060.44,11.047824127805862,1.6188170458007818,7.575635337849161,0.3262178213983762,0.336124215275049,0.092228397474108,0.2178822908877354,1.502418561886401,0.0038273266296456,1.0066988277867144
+# Now you can import as if you are directly in the pyQSC directory
+from qsc.qsc import Qsc
+from qsc.plot import plot_boundary
+df = pd.read_csv("data/XGStels/XGStels.csv")
 
-#
+row_index = 1400  # Change this to the desired row index
+row = df.iloc[row_index]
 
-stel=Qsc(rc=[1,-0.1041017136911027,-0.0661497535458673,0.0236437393892133],zs=[0,0.2002125058770746,-0.1107710956400647,0.0211717968763662],nfp=1.0,etabar=0.6195762665279808,B2c=-2.0503705070332745,p2=-8479.790983777048,order='r2')
-stel.plot_boundary(r = 0.2, savefig=f"image")
+# Extract parameters
+rc1, rc2, rc3 = row["rc1"], row["rc2"], row["rc3"]
+zs1, zs2, zs3 = row["zs1"], row["zs2"], row["zs3"]
+nfp, etabar, B2c, p2 = row["nfp"], row["etabar"], row["B2c"], row["p2"]
+
+try:
+    # Create Qsc instance and plot boundary
+    stel = Qsc(rc=[1, rc1, rc2, rc3], zs=[0, zs1, zs2, zs3], nfp=nfp, etabar=etabar, B2c=B2c, p2=p2, order='r2')
+    stel.plot_boundary(r=0.1, savefig=f"test_image{row_index + 1}")
+except Exception as e:
+    print(f"Plotting failed for row {row_index + 1}: {e}")
+    print(f"Values: {rc1}, {rc2}, {rc3}, {zs1}, {zs2}, {zs3}, {nfp}, {etabar}, {B2c}, {p2}\n") 

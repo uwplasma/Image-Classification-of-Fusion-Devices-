@@ -1,8 +1,16 @@
-import csv
+import sys
 import os
 import pandas as pd
-from pyQSC.qsc.qsc import Qsc
-from pyQSC.qsc.plot import plot_boundary
+# Get the root directory (parent of scripts)
+root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Add the pyQSC directory to the system path
+pyqsc_path = os.path.join(root_dir, 'pyQSC')
+sys.path.append(pyqsc_path)
+
+# Now you can import as if you are directly in the pyQSC directory
+from qsc.qsc import Qsc
+from qsc.plot import plot_boundary
 
 df = pd.read_csv("data/XGStels/XGStels.csv")
 
