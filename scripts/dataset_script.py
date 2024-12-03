@@ -39,9 +39,9 @@ df = pd.DataFrame({
     "label": labels
 })
 
-
-
-
+# Save the DataFrame as a CSV file
+output_csv_path = "/home/exouser/Public/Image-Classification-of-Fusion-Devices-/model_implementation/dataset.csv"
+df.to_csv(output_csv_path, index=False)
 
 
 # CODE TO TEST OUTPUT 
